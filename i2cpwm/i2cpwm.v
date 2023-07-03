@@ -1,13 +1,14 @@
 //plug pmod-led on PMOD2
 
 module i2cpwm (
-    input        clk, 
-    output       led, 
-    output [7:0] leds
+    input           clk, 
+    output          led, 
+    output [7:0]    leds, 
+    inout           scl, 
+    inout           sda
 );
       
-    reg [25:0] counter;
-    wire lclk = counter[19];
+    reg [31:0] counter;
     wire pwm_clock = counter[8];
 
     reg [7:0] value[8];
@@ -15,7 +16,6 @@ module i2cpwm (
     assign led = counter[21];
 
     initial begin
-        //LED = 8'b11111010;
         led_status = 0;
         value[0] = 1;
         value[1] = 20;

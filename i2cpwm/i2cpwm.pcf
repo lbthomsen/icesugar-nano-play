@@ -2,8 +2,8 @@ set_io led B6
 
 set_io clk D1
 
-#set_io -pullup yes SCL  A3
-#set_io -pullup yes SDA  B3
+set_io -pullup yes scl  A3
+set_io -pullup yes sda  B3
 
 set_io leds[0] C6
 set_io leds[1] E3
