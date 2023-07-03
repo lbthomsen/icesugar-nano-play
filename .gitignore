@@ -1,3 +1,9 @@
+# verilog
+*.bin
+*.bit
+*.asc
+*.blif
+*.json
 # Prerequisites
 *.d
 
