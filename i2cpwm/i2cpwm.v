@@ -1,4 +1,4 @@
-//plug pmod-led on PMOD2
+//plug pmod-led on PMOD2 
 
 module i2cpwm (
     input           clk, 
@@ -9,11 +9,9 @@ module i2cpwm (
 );
       
     reg [31:0] counter;
-    wire pwm_clock = counter[8];
+    wire pwm_clk;
 
     reg [7:0] value[8];
-
-    assign led = counter[21];
 
     initial begin
         value[0] = 1;
@@ -25,6 +23,16 @@ module i2cpwm (
         value[6] = 200;
         value[7] = 255;
     end
+
+    clk_module #(.DIVIDER(12000000)) clk_1_s (
+        .clk_in(clk), 
+        .clk_out(led)
+    );
+
+    clk_module #(.DIVIDER(1200000)) clk_1_ms (
+        .clk_in(clk), 
+        .clk_out(pwm_clk)
+    );
 
     i2c_slave_module i2c_slave (
         .clk(scl), 
