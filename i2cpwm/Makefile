@@ -2,7 +2,7 @@
 TARGET=i2cpwm
 TOP=i2cpwm
 
-OBJS+=i2cpwm.v pwm.v
+OBJS+=i2cpwm.v pwm.v i2c_slave.v
 
 ALL: $(TARGET).bit
 

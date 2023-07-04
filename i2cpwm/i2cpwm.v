@@ -4,7 +4,7 @@ module i2cpwm (
     input           clk, 
     output          led, 
     output [7:0]    leds, 
-    inout           scl, 
+    input           scl, 
     inout           sda
 );
       
@@ -16,7 +16,6 @@ module i2cpwm (
     assign led = counter[21];
 
     initial begin
-        led_status = 0;
         value[0] = 1;
         value[1] = 20;
         value[2] = 40;
@@ -26,6 +25,11 @@ module i2cpwm (
         value[6] = 200;
         value[7] = 255;
     end
+
+    i2c_slave_module i2c_slave (
+        .clk(scl), 
+        .sda(sda)
+    );
 
     pwm_module pwm0 (
         .clk(pwm_clock), 
@@ -79,10 +83,5 @@ module i2cpwm (
     begin
         counter <= counter + 1;
     end
-
-//    always @(posedge lclk)
-//    begin
-//        LED <= {LED[6:0], LED[7]};
-//    end
 
 endmodule
