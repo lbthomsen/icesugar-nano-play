@@ -2,12 +2,14 @@
 // Single PWM Line
 //
 module pwm_module (
-    input           clk, 
-    input   [7:0]   value, 
-    output          pulse
+    input               clk, 
+    input        [7:0]  value, 
+    output reg          out
 );
 
     reg [7:0] counter;
+
+    assign out = counter < value ? 0 : 1;
 
     initial begin
         counter <= 0;
@@ -15,8 +17,6 @@ module pwm_module (
 
     always @(posedge clk) begin
         counter <= counter + 1;
-        if (counter >= value) pulse = 1;
-        else pulse = 0;
     end
 
 endmodule

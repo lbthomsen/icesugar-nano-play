@@ -8,10 +8,13 @@ module i2cpwm (
     inout           sda
 );
       
-    reg [31:0] counter;
+    //reg [31:0] counter;
+    wire led_clk;
     wire pwm_clk;
 
     reg [7:0] value[8];
+
+    assign led = led_clk;
 
     initial begin
         value[0] = 1;
@@ -26,10 +29,10 @@ module i2cpwm (
 
     clk_module #(.DIVIDER(12000000)) clk_1_s (
         .clk_in(clk), 
-        .clk_out(led)
+        .clk_out(led_clk)
     );
 
-    clk_module #(.DIVIDER(1200000)) clk_1_ms (
+    clk_module #(.DIVIDER(12000)) clk_1_ms (
         .clk_in(clk), 
         .clk_out(pwm_clk)
     );
@@ -42,54 +45,54 @@ module i2cpwm (
     pwm_module pwm0 (
         .clk(pwm_clock), 
         .value(value[0]), 
-        .pulse(leds[0])
+        .out(leds[0])
     );
 
     pwm_module pwm1 (
         .clk(pwm_clock), 
         .value(value[1]), 
-        .pulse(leds[1])
+        .out(leds[1])
     );
 
     pwm_module pwm2 (
         .clk(pwm_clock), 
         .value(value[2]), 
-        .pulse(leds[2])
+        .out(leds[2])
     );
 
     pwm_module pwm3 (
         .clk(pwm_clock), 
         .value(value[3]), 
-        .pulse(leds[3])
+        .out(leds[3])
     );
 
     pwm_module pwm4 (
         .clk(pwm_clock), 
         .value(value[4]), 
-        .pulse(leds[4])
+        .out(leds[4])
     );
 
     pwm_module pwm5 (
         .clk(pwm_clock), 
         .value(value[5]), 
-        .pulse(leds[5])
+        .out(leds[5])
     );
 
     pwm_module pwm6 (
         .clk(pwm_clock), 
         .value(value[6]), 
-        .pulse(leds[6])
+        .out(leds[6])
     );
 
     pwm_module pwm7 (
         .clk(pwm_clock), 
         .value(value[7]), 
-        .pulse(leds[7])
+        .out(leds[7])
     );
 
-    always @(posedge clk)
-    begin
-        counter <= counter + 1;
-    end
+//    always @(posedge clk)
+//    begin
+//        counter <= counter + 1;
+//    end
 
 endmodule
