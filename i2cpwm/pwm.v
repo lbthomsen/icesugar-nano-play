@@ -4,7 +4,7 @@
 module pwm_module (
     input               clk, 
     input        [7:0]  value, 
-    output reg          out
+    output              out
 );
 
     reg [7:0] counter;
@@ -12,7 +12,7 @@ module pwm_module (
     assign out = counter < value ? 0 : 1;
 
     initial begin
-        counter <= 0;
+        counter = 0;
     end
 
     always @(posedge clk) begin

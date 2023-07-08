@@ -3,7 +3,7 @@
 //
 module clk_module #(parameter DIVIDER=12000000) (
     input           clk_in, 
-    output reg      clk_out
+    output          clk_out
 );
 
     reg [31:0] counter;
